@@ -1,18 +1,18 @@
 {
-  "exportedAt": "2026-11-06T19:11:41.146Z",
+  "exportedAt": "2026-11-06T19:52:15.416Z",
   "storeMode": "redis",
   "counts": {
-    "calls": 4,
+    "calls": 5,
     "orders": 0,
     "signals": 0,
     "equity": 1,
     "errors": 0,
-    "depth": 20,
-    "spreads": 20
+    "depth": 25,
+    "spreads": 25
   },
   "stateStartedAt": "2026-11-06T19:02:45.072Z",
   "lastTick": {
-    "ts": "2026-11-06T19:11:15.802Z",
+    "ts": "2026-11-06T19:49:49.071Z",
     "equity": 100000000,
     "pairsOk": 5,
     "pairsInvalid": 0,

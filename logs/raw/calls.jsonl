@@ -2,3 +2,4 @@
 {"ts":"2026-11-06T19:03:18.572Z","source":"vercel","actions":[],"errors":[],"skips":[],"orders":[],"processedCandles":[],"pairsOk":["btc_idr","eth_idr","xrp_idr","sol_idr","doge_idr"],"pairsInvalid":[],"latencyMs":6209}
 {"ts":"2026-11-06T19:04:33.698Z","source":"vercel","actions":[],"errors":[],"skips":[],"orders":[],"processedCandles":[],"pairsOk":["btc_idr","eth_idr","xrp_idr","sol_idr","doge_idr"],"pairsInvalid":[],"latencyMs":6267}
 {"ts":"2026-11-06T19:11:15.802Z","source":"vercel","actions":[],"errors":[],"skips":[],"orders":[],"processedCandles":[],"pairsOk":["btc_idr","eth_idr","xrp_idr","sol_idr","doge_idr"],"pairsInvalid":[],"latencyMs":6379}
+{"ts":"2026-11-06T19:49:49.071Z","source":"vercel","actions":[],"errors":[],"skips":[],"orders":[],"processedCandles":[],"pairsOk":["btc_idr","eth_idr","xrp_idr","sol_idr","doge_idr"],"pairsInvalid":[],"latencyMs":6346}

@@ -159,11 +159,11 @@ Region `sin1` (Singapura) sudah dipilih di `vercel.json` agar dekat ke Indodax.
 
 > **Status nyata saat pengumpulan:** bot sudah berjalan di
 > **https://uas-indodax-fin02.vercel.app** (dashboard `/dashboard`, status `/status`) dengan
-> storage Upstash Redis. Pemicu 4 jam dipasang lewat **Windows Task Scheduler**
-> (`scripts/tick_remote.ps1`, menit ke-7 tiap 4 jam) karena repository GitHub belum tersedia saat deploy.
-> Sebagai jaring pengaman, `vercel.json` juga memuat cron harian `7 0 * * *` (batas plan Hobby).
-> Workflow GitHub Actions di bawah tetap disediakan dan **direkomendasikan** untuk menggantikan Task
-> Scheduler begitu repository GitHub ada — cukup isi dua secrets, tanpa mengubah kode.
+> storage Upstash Redis. Pemicu 4 jam berjalan dari **GitHub Actions** di repository publik
+> **https://github.com/ibrafinnn05/uas-indodax-fin02** (`workflow_dispatch` sudah diuji, run #1 sukses),
+> jadi bot tetap hidup walau laptop mati. `vercel.json` juga memuat cron harian `7 0 * * *` sebagai
+> jaring pengaman (batas plan Hobby). Pemicu lokal Task Scheduler yang dipakai saat pertama deploy sudah
+> **dinonaktifkan** agar tidak dobel.
 
 Vercel Cron Hobby hanya sekali sehari, jadi penjadwal utama yang disarankan adalah **GitHub Actions**
 (`.github/workflows/tick.yml`, `cron: '7 */4 * * *'` UTC = 07.07, 11.07, 15.07, 19.07,
@@ -184,6 +184,7 @@ curl -H "Authorization: Bearer $CRON_SECRET" https://<project>.vercel.app/api/ti
 
 Deployment yang dipakai saat pengumpulan:
 
+- Repositori publik (bukti freeze): https://github.com/ibrafinnn05/uas-indodax-fin02
 - Dashboard live: https://uas-indodax-fin02.vercel.app/dashboard (atau `/api/dashboard`, `?format=json` untuk data mentah)
 - Status operasional: https://uas-indodax-fin02.vercel.app/status
 - Endpoint tick: `POST/GET https://uas-indodax-fin02.vercel.app/api/tick` (wajib header `Authorization: Bearer <CRON_SECRET>`)
@@ -237,6 +238,7 @@ Minimum order **Rp25.000** (lebih ketat dari `trade_min_base_currency` Rp10.000)
 
 | | |
 |---|---|
+| Repositori publik | https://github.com/ibrafinnn05/uas-indodax-fin02 |
 | Commit freeze | `662f5db7b3d93f4baf0e6b545749fa8a7be903cc` (`662f5db`) |
 | Waktu commit (WIB) | 2026-11-06 23.22:30 WIB |
 | Waktu freeze aturan (data cutoff) | 2026-11-06 19.00 WIB (2026-11-06 12.00 UTC) — aturan dan parameter dibekukan pada waktu ini; commit dijalankan pada hari yang sama, 4 jam kemudian |

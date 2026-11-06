@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-11-06T19:11:41.977Z",
+  "generatedAt": "2026-11-06T19:52:16.603Z",
   "freezeAt": "2026-11-06T12:00:00Z",
   "forwardStatus": "running",
-  "forwardDays": 0.006214178240740741,
+  "forwardDays": 0.03439271990740741,
   "backtest": {
     "startEquity": 100000000,
     "endEquity": 173456975.19452,
@@ -55,17 +55,17 @@
     "win": null,
     "trades": 0,
     "partial": true,
-    "days": 0.006214178240740741,
+    "days": 0.03439271990740741,
     "benchmark": null
   },
   "raw": {
-    "calls": 4,
+    "calls": 5,
     "orders": 0,
     "signals": 0,
     "equity": 1,
     "errors": 0,
-    "spreads": 20,
-    "depthSnapshots": 20,
+    "spreads": 25,
+    "depthSnapshots": 25,
     "processedCandles": 1
   },
   "match": {
