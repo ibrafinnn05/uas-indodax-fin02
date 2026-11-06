@@ -220,14 +220,15 @@ Minimum order **Rp25.000** (lebih ketat dari `trade_min_base_currency` Rp10.000)
 
 | | |
 |---|---|
-| Commit freeze | `{{FREEZE_HASH}}` |
-| Waktu commit (WIB) | {{FREEZE_TIME_WIB}} |
-| Data cutoff | 2026-11-06 12:00 UTC (close candle 4 jam terakhir saat freeze) |
+| Commit freeze | `662f5db7b3d93f4baf0e6b545749fa8a7be903cc` (`662f5db`) |
+| Waktu commit (WIB) | 2026-11-06 23.22:30 WIB |
+| Waktu freeze aturan (data cutoff) | 2026-11-06 19.00 WIB (2026-11-06 12.00 UTC) — aturan dan parameter dibekukan pada waktu ini; commit dijalankan pada hari yang sama, 4 jam kemudian |
 | Isi yang dibekukan | aturan strategi (`lib/strategy.js`, `lib/config.js`), universe (`lib/universe.js`), backtest 3 tahun, snapshot order book, `data/freeze.json` |
 | Setelah freeze | hanya perbaikan bug yang tidak mengubah aturan; setiap perubahan dicatat di log dan README |
 
-Isi commit freeze dicatat ulang setelah hash diketahui pada commit terpisah
-(`catat hash freeze`), sehingga riwayat commit tetap utuh.
+Bukti: `git log --oneline` menunjukkan commit ini sebagai commit pertama; jangan force-push atau
+menulis ulang riwayat setelahnya. Isi commit dicatat ulang pada commit kedua
+(`catat hash freeze`), sehingga riwayat tetap utuh.
 
 ---
 
