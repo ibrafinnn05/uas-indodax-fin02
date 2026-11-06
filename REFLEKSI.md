@@ -145,8 +145,10 @@ diperkirakan sejak awal (dan harusnya muncul di log):
 
 1. **Keterlambatan jadwal.** Penjadwal GitHub Actions bisa terlambat beberapa menit; batas candle
    berikutnya adalah 4 jam. Candle yang diproses setelah batas itu **tidak dihitung uptime** (definisi
-   resmi). Menit ke-7 dipilih agar tidak menumpuk di menit ke-0. Waktu tiap panggilan tercatat di
-   `calls.jsonl` dan dipakai langsung untuk angka uptime.
+   resmi). Menit ke-7 dipilih agar tidak menumpuk di menit ke-0. Pengamatan nyata: run #2 dijadwalkan
+   `20:07Z` tetapi benar-benar jalan `20:50Z` (**43 menit terlambat**) — masih jauh sebelum candle
+   berikutnya tutup, jadi tidak mengurangi uptime. Waktu tiap panggilan tercatat di `calls.jsonl`
+   dan dipakai langsung untuk angka uptime.
 2. **Isi order berbeda secara struktural.** Backtest mengisi limit pada `min(open, limit)` di candle
    berikutnya bila `low < limit`; bot mengisi hanya bila `ask <= limit` pada order book live.
    Artinya bot **lebih lambat dan lebih konservatif** — tidak akan ada fill yang lebih baik dari
