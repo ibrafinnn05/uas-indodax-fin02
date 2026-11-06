@@ -1,10 +1,10 @@
 {
- "generatedAt": "2026-11-06T21:29:25.788Z",
+ "generatedAt": "2026-11-06T21:32:21.360Z",
  "summary": {
-  "generatedAt": "2026-11-06T21:29:25.788Z",
+  "generatedAt": "2026-11-06T21:32:21.360Z",
   "freezeAt": "2026-11-06T12:00:00Z",
   "forwardStatus": "running",
-  "forwardDays": 0.10186013888888888,
+  "forwardDays": 0.10389222222222222,
   "backtest": {
    "startEquity": 100000000,
    "endEquity": 173456975.19452,
@@ -57,7 +57,7 @@
    "win": null,
    "trades": 0,
    "partial": true,
-   "days": 0.10186013888888888,
+   "days": 0.10389222222222222,
    "benchmark": {
     "totalReturn": -0.01064129276657988,
     "endEquity": 98935870.72334202,
@@ -85,7 +85,7 @@
   }
  },
  "model": {
-  "generatedAt": "2026-11-06T21:29:25.788Z",
+  "generatedAt": "2026-11-06T21:32:21.360Z",
   "freeze": {
    "freezeAt": "2026-11-06T12:00:00Z",
    "dataCutoff": "2026-11-06T12:00:00Z",
@@ -180,7 +180,7 @@
   },
   "backtest": {
    "meta": {
-    "generatedAt": "2026-11-06T21:29:25.754Z",
+    "generatedAt": "2026-11-06T21:32:21.334Z",
     "freezeAt": "2026-11-06T12:00:00.000Z",
     "timeframe": "240",
     "start": "2023-11-06T00:00:00.000Z",
@@ -57740,8 +57740,8 @@
   "forward": {
    "status": "running",
    "startedAt": "2026-11-06T19:02:45.072Z",
-   "now": "2026-11-06T21:29:25.788Z",
-   "daysElapsed": 0.10186013888888888,
+   "now": "2026-11-06T21:32:21.360Z",
+   "daysElapsed": 0.10389222222222222,
    "daysTarget": 10,
    "source": "logs/raw (file mentah)",
    "metrics": {
@@ -57958,7 +57958,7 @@
     "win": null,
     "trades": 0,
     "partial": true,
-    "days": 0.10186013888888888,
+    "days": 0.10389222222222222,
     "benchmark": {
      "totalReturn": -0.01064129276657988,
      "endEquity": 98935870.72334202,
@@ -58094,7 +58094,7 @@
   "reconciliation": {
    "logsSource": "logs/raw (file mentah)",
    "manifest": {
-    "exportedAt": "2026-11-06T21:29:08.050Z",
+    "exportedAt": "2026-11-06T21:32:20.801Z",
     "storeMode": "redis",
     "counts": {
      "calls": 9,

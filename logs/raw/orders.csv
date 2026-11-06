@@ -1,1 +1,1 @@
-ts,pair,side,reason,qty,price,notional,fee,best_bid,best_ask,spread_cost,slip_cost,net_pnl,ret
+ts,pair,side,reason,qty,price,notional,fee,best_bid,best_ask,signal_price,slippage_bps,spread_cost,slip_cost,net_pnl,ret

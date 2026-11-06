@@ -69,9 +69,10 @@ export async function exportLogs(root = ROOT) {
     csv(
       orders.map((o) => [
         o.ts, o.pair, o.side, o.reason, o.qty, o.price, o.notional, o.fee,
-        o.bestBid, o.bestAsk, o.spreadCost, o.slipCost, o.netPnl, o.ret,
+        o.bestBid, o.bestAsk, o.signalPrice, o.slippageBps,
+        o.spreadCost, o.slipCost, o.netPnl, o.ret,
       ]),
-      ['ts', 'pair', 'side', 'reason', 'qty', 'price', 'notional', 'fee', 'best_bid', 'best_ask', 'spread_cost', 'slip_cost', 'net_pnl', 'ret'],
+      ['ts', 'pair', 'side', 'reason', 'qty', 'price', 'notional', 'fee', 'best_bid', 'best_ask', 'signal_price', 'slippage_bps', 'spread_cost', 'slip_cost', 'net_pnl', 'ret'],
     ),
   );
   fs.writeFileSync(
