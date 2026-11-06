@@ -1,10 +1,10 @@
 {
- "generatedAt": "2026-11-06T19:52:16.603Z",
+ "generatedAt": "2026-11-06T20:05:13.283Z",
  "summary": {
-  "generatedAt": "2026-11-06T19:52:16.603Z",
+  "generatedAt": "2026-11-06T20:05:13.283Z",
   "freezeAt": "2026-11-06T12:00:00Z",
   "forwardStatus": "running",
-  "forwardDays": 0.03439271990740741,
+  "forwardDays": 0.04338207175925926,
   "backtest": {
    "startEquity": 100000000,
    "endEquity": 173456975.19452,
@@ -57,18 +57,23 @@
    "win": null,
    "trades": 0,
    "partial": true,
-   "days": 0.03439271990740741,
-   "benchmark": null
+   "days": 0.04338207175925926,
+   "benchmark": {
+    "totalReturn": -0.01064129276657988,
+    "endEquity": 98935870.72334202,
+    "pair": "btc_idr",
+    "mdd": 0
+   }
   },
   "raw": {
-   "calls": 5,
+   "calls": 6,
    "orders": 0,
    "signals": 0,
    "equity": 1,
    "errors": 0,
-   "spreads": 25,
-   "depthSnapshots": 25,
-   "processedCandles": 1
+   "spreads": 30,
+   "depthSnapshots": 30,
+   "processedCandles": 2
   },
   "match": {
    "expected": 0,
@@ -80,7 +85,7 @@
   }
  },
  "model": {
-  "generatedAt": "2026-11-06T19:52:16.603Z",
+  "generatedAt": "2026-11-06T20:05:13.283Z",
   "freeze": {
    "freezeAt": "2026-11-06T12:00:00Z",
    "dataCutoff": "2026-11-06T12:00:00Z",
@@ -175,7 +180,7 @@
   },
   "backtest": {
    "meta": {
-    "generatedAt": "2026-11-06T19:52:16.558Z",
+    "generatedAt": "2026-11-06T20:05:13.256Z",
     "freezeAt": "2026-11-06T12:00:00.000Z",
     "timeframe": "240",
     "start": "2023-11-06T00:00:00.000Z",
@@ -57735,8 +57740,8 @@
   "forward": {
    "status": "running",
    "startedAt": "2026-11-06T19:02:45.072Z",
-   "now": "2026-11-06T19:52:16.603Z",
-   "daysElapsed": 0.03439271990740741,
+   "now": "2026-11-06T20:05:13.283Z",
+   "daysElapsed": 0.04338207175925926,
    "daysTarget": 10,
    "source": "logs/raw (file mentah)",
    "metrics": {
@@ -57759,20 +57764,20 @@
     "points": 3
    },
    "raw": {
-    "calls": 5,
+    "calls": 6,
     "orders": 0,
     "signals": 0,
     "equity": 1,
     "errors": 0,
-    "spreads": 25,
-    "depthSnapshots": 25,
-    "processedCandles": 1
+    "spreads": 30,
+    "depthSnapshots": 30,
+    "processedCandles": 2
    },
    "ops": {
-    "expected": 1,
-    "executed": 1,
+    "expected": 2,
+    "executed": 2,
     "uptime": 1,
-    "calls": 5,
+    "calls": 6,
     "errors": 0,
     "killSwitchUses": 0,
     "lateCalls": 0
@@ -57789,7 +57794,7 @@
     },
     "killSwitch": false,
     "lastTick": {
-     "ts": "2026-11-06T19:49:49.071Z",
+     "ts": "2026-11-06T20:03:52.008Z",
      "equity": 100000000,
      "pairsOk": 5,
      "pairsInvalid": 0,
@@ -57814,7 +57819,7 @@
      "equity": 100000000
     },
     {
-     "ts": 1793994589071,
+     "ts": 1793995432008,
      "equity": 100000000
     }
    ],
@@ -57824,8 +57829,8 @@
      "pair": "btc_idr",
      "symbol": "BTCIDR",
      "backtestBps": 15.390565678017849,
-     "forwardBps": 21.93899062391058,
-     "forwardN": 5,
+     "forwardBps": 21.93532019459468,
+     "forwardN": 6,
      "buySlipBps": 0,
      "sellSlipBps": 0
     },
@@ -57833,8 +57838,8 @@
      "pair": "eth_idr",
      "symbol": "ETHIDR",
      "backtestBps": 11.1170127351557,
-     "forwardBps": 1.2393263022221122,
-     "forwardN": 5,
+     "forwardBps": 2.7262045818244305,
+     "forwardN": 6,
      "buySlipBps": 2.9395248910339022,
      "sellSlipBps": 0
     },
@@ -57842,8 +57847,8 @@
      "pair": "xrp_idr",
      "symbol": "XRPIDR",
      "backtestBps": 15.382105483953668,
-     "forwardBps": 13.076779376050812,
-     "forwardN": 5,
+     "forwardBps": 13.772759947762635,
+     "forwardN": 6,
      "buySlipBps": 0,
      "sellSlipBps": 0
     },
@@ -57851,8 +57856,8 @@
      "pair": "sol_idr",
      "symbol": "SOLIDR",
      "backtestBps": 15.505352398812315,
-     "forwardBps": 9.281607846854083,
-     "forwardN": 5,
+     "forwardBps": 11.812787221413256,
+     "forwardN": 6,
      "buySlipBps": 0,
      "sellSlipBps": 0
     },
@@ -57860,17 +57865,19 @@
      "pair": "doge_idr",
      "symbol": "DOGEIDR",
      "backtestBps": 15.24390243902439,
-     "forwardBps": 15.186028853454822,
-     "forwardN": 5,
+     "forwardBps": 11.39674207982745,
+     "forwardN": 6,
      "buySlipBps": 0,
      "sellSlipBps": 0
     }
    ],
    "window": {
     "start": "2026-11-06T12:00:00.000Z",
-    "end": "2026-11-06T12:00:00.999Z",
+    "end": "2026-11-06T19:59:59.999Z",
     "startMs": 1793966400000,
-    "endMs": 1793966400999,
+    "endMs": 1793995199999,
+    "candles": 2,
+    "candleSource": "data/raw + logs/raw/candles.json (snapshot bot)",
     "metrics": {
      "startEquity": 100000000,
      "endEquity": 100000000,
@@ -57889,7 +57896,7 @@
      "totalCost": 0,
      "grossProfit": 0,
      "costShare": null,
-     "years": 3.165639972621492e-8,
+     "years": 0.0009126168973559459,
      "trades": [],
      "signals": [],
      "equity": [
@@ -57899,11 +57906,39 @@
        "cash": 100000000,
        "invested": 0,
        "nPos": 0
+      },
+      {
+       "ts": 1793980800000,
+       "equity": 100000000,
+       "cash": 100000000,
+       "invested": 0,
+       "nPos": 0
+      },
+      {
+       "ts": 1793995200000,
+       "equity": 100000000,
+       "cash": 100000000,
+       "invested": 0,
+       "nPos": 0
       }
      ],
      "openPositions": [],
-     "benchmark": null,
-     "benchmarkPoints": []
+     "benchmark": {
+      "totalReturn": -0.01064129276657988,
+      "endEquity": 98935870.72334202,
+      "pair": "btc_idr",
+      "mdd": 0
+     },
+     "benchmarkPoints": [
+      {
+       "ts": 1793980800000,
+       "equity": 99217263.08801681
+      },
+      {
+       "ts": 1793995200000,
+       "equity": 99348714.3056391
+      }
+     ]
     },
     "trades": [],
     "signals": [],
@@ -57923,8 +57958,13 @@
     "win": null,
     "trades": 0,
     "partial": true,
-    "days": 0.03439271990740741,
-    "benchmark": null
+    "days": 0.04338207175925926,
+    "benchmark": {
+     "totalReturn": -0.01064129276657988,
+     "endEquity": 98935870.72334202,
+     "pair": "btc_idr",
+     "mdd": 0
+    }
    }
   },
   "costs": {
@@ -58054,20 +58094,22 @@
   "reconciliation": {
    "logsSource": "logs/raw (file mentah)",
    "manifest": {
-    "exportedAt": "2026-11-06T19:52:15.416Z",
+    "exportedAt": "2026-11-06T20:05:12.458Z",
     "storeMode": "redis",
     "counts": {
-     "calls": 5,
+     "calls": 6,
      "orders": 0,
      "signals": 0,
      "equity": 1,
      "errors": 0,
-     "depth": 25,
-     "spreads": 25
+     "depth": 30,
+     "spreads": 30,
+     "candlesPairs": 5,
+     "candlesBars": 1000
     },
     "stateStartedAt": "2026-11-06T19:02:45.072Z",
     "lastTick": {
-     "ts": "2026-11-06T19:49:49.071Z",
+     "ts": "2026-11-06T20:03:52.008Z",
      "equity": 100000000,
      "pairsOk": 5,
      "pairsInvalid": 0,

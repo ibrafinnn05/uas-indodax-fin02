@@ -1,18 +1,20 @@
 {
-  "exportedAt": "2026-11-06T19:52:15.416Z",
+  "exportedAt": "2026-11-06T20:05:12.458Z",
   "storeMode": "redis",
   "counts": {
-    "calls": 5,
+    "calls": 6,
     "orders": 0,
     "signals": 0,
     "equity": 1,
     "errors": 0,
-    "depth": 25,
-    "spreads": 25
+    "depth": 30,
+    "spreads": 30,
+    "candlesPairs": 5,
+    "candlesBars": 1000
   },
   "stateStartedAt": "2026-11-06T19:02:45.072Z",
   "lastTick": {
-    "ts": "2026-11-06T19:49:49.071Z",
+    "ts": "2026-11-06T20:03:52.008Z",
     "equity": 100000000,
     "pairsOk": 5,
     "pairsInvalid": 0,

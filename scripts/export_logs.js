@@ -37,6 +37,17 @@ export async function exportLogs(root = ROOT) {
     store.list(LOG_KEYS.spreads),
   ]);
   const state = await store.getState();
+  let candles = null;
+  if (typeof store.getValue === 'function') {
+    const txt = await store.getValue(LOG_KEYS.candles);
+    if (txt) {
+      try {
+        candles = JSON.parse(txt);
+      } catch {
+        candles = null;
+      }
+    }
+  }
 
   const files = {
     'calls.jsonl': jsonl(calls),
@@ -46,6 +57,7 @@ export async function exportLogs(root = ROOT) {
     'errors.jsonl': jsonl(errors),
     'depth.jsonl': jsonl(depth),
     'spreads.jsonl': jsonl(spreads),
+    'candles.json': JSON.stringify(candles, null, 1),
     'state.json': JSON.stringify(state, null, 1),
   };
   for (const [name, body] of Object.entries(files)) {
@@ -78,6 +90,8 @@ export async function exportLogs(root = ROOT) {
       errors: errors.length,
       depth: depth.length,
       spreads: spreads.length,
+      candlesPairs: candles ? Object.keys(candles.pairs || {}).length : 0,
+      candlesBars: candles ? Object.values(candles.pairs || {}).reduce((a, b) => a + (b?.length || 0), 0) : 0,
     },
     stateStartedAt: state?.startedAt || null,
     lastTick: state?.lastTick || null,

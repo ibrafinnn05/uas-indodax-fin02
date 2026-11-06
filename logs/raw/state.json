@@ -13,18 +13,18 @@
  },
  "killSwitch": false,
  "lastTick": {
-  "ts": "2026-11-06T19:49:49.071Z",
+  "ts": "2026-11-06T20:03:52.008Z",
   "equity": 100000000,
   "pairsOk": 5,
   "pairsInvalid": 0,
   "orders": 0
  },
  "lastCandle": {
-  "btc_idr": 1793966400,
-  "eth_idr": 1793966400,
-  "xrp_idr": 1793966400,
-  "sol_idr": 1793966400,
-  "doge_idr": 1793966400
+  "btc_idr": 1793980800,
+  "eth_idr": 1793980800,
+  "xrp_idr": 1793980800,
+  "sol_idr": 1793980800,
+  "doge_idr": 1793980800
  },
  "stats": {
   "orders": 0,

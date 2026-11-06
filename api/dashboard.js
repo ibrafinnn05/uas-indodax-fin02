@@ -21,7 +21,7 @@ export default async function handler(req, res) {
       freeze,
       depthSummary,
       nowMs: Date.now(),
-      includeWindowBacktest: false,
+      includeWindowBacktest: true,
     });
 
     res.setHeader('Cache-Control', 'no-store');

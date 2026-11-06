@@ -29,7 +29,7 @@ Modal virtual Rp100.000.000. Candle 4 jam Indodax, 2023-11-06 → 2026-11-06 (fr
 | In-sample 2023-11 → 2025-11 | +58,48% | +25,87% | −18,07% | 1,47 | 132 | +212,99% |
 | Out-of-sample 2025-11 → freeze | **+9,45%** | +9,44% | −10,43% | 1,34 | 54 | −21,85% (MDD −41,19%) |
 | 10 hari terakhir sebelum freeze | −1,99% | — | −2,30% | — | 2 | −6,08% |
-| Forward (berjalan, parsial) | 0,00% | — | 0,00% | — | 0 | lihat dashboard |
+| Forward (berjalan, parsial) | 0,00% | — | 0,00% | — | 0 | 2 candle; lihat dashboard |
 
 - Biaya total backtest Rp25.490.135 = **9,53% dari laba kotor** (fee + spread + slippage).
 - Sinyal masuk: **limit buy** pada `close − 1,1 ATR`; exit hanya **stop (5 ATR)** atau **waktu (120 bar)**.
@@ -248,6 +248,20 @@ Minimum order **Rp25.000** (lebih ketat dari `trade_min_base_currency` Rp10.000)
 Bukti: `git log --oneline` menunjukkan commit ini sebagai commit pertama; jangan force-push atau
 menulis ulang riwayat setelahnya. Isi commit dicatat ulang pada commit kedua
 (`catat hash freeze`), sehingga riwayat tetap utuh.
+
+### 7.1 Perubahan pasca-freeze (tanpa mengubah aturan, parameter, universe)
+
+| Commit | Perubahan | Alasan |
+|---|---|---|
+| `4cc0ffa` | path separator ZIP, zona waktu dashboard WIB, uptime dari candle, uji eksekusi | perbaikan bug pasca-freeze |
+| `be3d5bb` | deploy Vercel + Upstash Redis, `.vercelignore`, penjadwal 4 jam | infrastruktur; filesystem Vercel read-only (`EROFS`) |
+| `3cb9024` | badge forward menampilkan `PARSIAL x/10 hari` | transparansi status |
+| `bf25971` | dokumentasi GitHub Actions sebagai penjadwal cloud | penjadwal tidak boleh bergantung laptop |
+| commit dokumentasi ini | snapshot candle bot (`logs/raw/candles.json`) + backtest jendela forward di dashboard live + tabel statistik trade wajib UAS | kelengkapan metrik dashboard; tidak mengubah logika sinyal |
+
+Tidak ada perubahan pada `lib/strategy.js`, `lib/config.js`, `lib/universe.js`, maupun parameter
+yang tercatat di `data/freeze.json`. Perubahan di atas hanya menambah cara **membaca dan
+menghitung ulang** hasil yang sudah ada.
 
 ---
 
