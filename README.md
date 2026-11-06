@@ -188,6 +188,7 @@ Deployment yang dipakai saat pengumpulan:
 - Dashboard live: https://uas-indodax-fin02.vercel.app/dashboard (atau `/api/dashboard`, `?format=json` untuk data mentah)
 - Status operasional: https://uas-indodax-fin02.vercel.app/status
 - Endpoint tick: `POST/GET https://uas-indodax-fin02.vercel.app/api/tick` (wajib header `Authorization: Bearer <CRON_SECRET>`)
+- Kill switch: `POST/GET https://uas-indodax-fin02.vercel.app/api/kill?on=1` (atau `?on=0`), header yang sama
 - Dashboard offline: `public/index.html` (bisa dibuka tanpa internet)
 
 ---
@@ -286,8 +287,11 @@ menghitung ulang** hasil yang sudah ada.
 - Endpoint `/api/tick` menolak panggilan tanpa `CRON_SECRET` (perbandingan waktu-konstan).
 - Tidak ada API key Indodax di kode atau log; bot hanya memakai API publik.
 - Tidak ada secret di repository: `.env` di-ignore, `.env.example` tanpa isi.
-- Kill switch via environment variable `KILL_SWITCH=1` (tanpa deploy ulang) — aktif pada invocation
-  berikutnya; setiap pemakaian tercatat di `logs/raw/calls.jsonl`.
+- **Kill switch tanpa deploy ulang**: `GET/POST /api/kill?on=1` (atau `?on=0`) dengan header
+  `Authorization: Bearer <CRON_SECRET>`. Nilai disimpan di storage (`finn:kill`) dan dibaca setiap
+  tick; environment variable `KILL_SWITCH=1` tetap didukung sebagai lapis kedua. Setiap tick yang
+  berjalan dengan kill switch aktif mencatat `killSwitch: true` di `logs/raw/calls.jsonl`, dan setiap
+  order baru yang dibatalkan tercatat sebagai `kill_switch` / `kill_switch_cancel`.
 - Retry dibatasi 3 percobaan dengan backoff; timeout 12 detik per request; pacing maksimal
   3 request/detik.
 - Idempotency: tiap candle hanya diproses sekali per pasangan (kunci `finn:seen:<pair>:<candle>`),

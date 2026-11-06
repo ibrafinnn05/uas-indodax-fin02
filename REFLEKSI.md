@@ -6,7 +6,7 @@ Dokumen ini menjelaskan **selisihnya dalam angka**. Semua angka di bawah berasal
 
 > **Status forward saat pengumpulan: parsial.** Freeze 6 Nov 2026 19.00 WIB; bot live di Vercel dan
 > mulai berjalan pada panggilan produksi pertama `2026-11-07 02.02 WIB` (storage Upstash Redis).
-> Per 7 Nov 2026 03.03 WIB forward baru **0,04 hari** dan **2 candle**. Tenggat UAS 14 Nov membuat
+> Per 7 Nov 2026 04.29 WIB forward baru **0,10 hari** dan **2 candle**. Tenggat UAS 14 Nov membuat
 > forward 10 hari penuh tidak mungkin selesai. Dashboard menandainya "parsial"; angka forward
 > **bukan hasil final**.
 
@@ -16,16 +16,16 @@ Dokumen ini menjelaskan **selisihnya dalam angka**. Semua angka di bawah berasal
 
 | Metrik | Nilai | Sumber |
 |---|---:|---|
-| Hari berjalan | 0,04 hari dari 10 | `logs/raw/state.json` |
-| Panggilan tercatat | 6 (termasuk uji manual GitHub Actions) | `logs/raw/calls.jsonl` |
+| Hari berjalan | 0,10 hari dari 10 | `logs/raw/state.json` |
+| Panggilan tercatat | 9 (termasuk uji manual GitHub Actions + uji kill switch) | `logs/raw/calls.jsonl` |
 | Candle terproses tepat waktu | 2 / 2 (**100%**) | `processedCandles` + definisi uptime |
 | Error API/data | 0 | `logs/raw/errors.jsonl` |
-| Pemakaian kill switch (produksi) | 0× | `logs/raw/calls.jsonl` |
+| Pemakaian kill switch (produksi) | 1× (uji terkontrol, langsung dimatikan) | `logs/raw/calls.jsonl` |
 | Order simulasi | 0 | `logs/raw/orders.jsonl` |
 | Sinyal / skip | 0 sinyal, 0 skip | `logs/raw/signals.jsonl` |
 | Equity | Rp100.000.000 (0,00%) | `logs/raw/equity.jsonl` + state |
-| Snapshot spread forward | 30 (5 per panggilan) | `logs/raw/spreads.jsonl` |
-| Snapshot order book mentah | 30 | `logs/raw/depth.jsonl` |
+| Snapshot spread forward | 45 (5 per panggilan) | `logs/raw/spreads.jsonl` |
+| Snapshot order book mentah | 45 | `logs/raw/depth.jsonl` |
 | Snapshot candle bot | 2 candle × 5 pair (1.000 bar) | `logs/raw/candles.json` |
 
 **Kenapa belum ada trade?** Bukan karena bot tidak jalan: dua candle tertutup yang diproses
@@ -151,11 +151,11 @@ diperkirakan sejak awal (dan harusnya muncul di log):
    berikutnya bila `low < limit`; bot mengisi hanya bila `ask <= limit` pada order book live.
    Artinya bot **lebih lambat dan lebih konservatif** — tidak akan ada fill yang lebih baik dari
    backtest karena dibuat di mid/close.
-3. **Spread & slippage.** Backtest memakai median snapshot sebelum freeze (11,1–15,5 bp). 30 snapshot
-   forward pertama (6 panggilan × 5 pair) memberi median: BTC 21,9 bp · ETH 2,7 bp · XRP 13,8 bp ·
-   SOL 11,8 bp · DOGE 11,4 bp. Sampelnya masih kecil dan bergerak antar panggilan, tetapi untuk
-   3 dari 5 pair arahnya **biaya forward lebih rendah atau setara** asumsi backtest; BTC dan XRP
-   justru lebih lebar, sehingga estimasi konservatif tetap dipakai.
+3. **Spread & slippage.** Backtest memakai median snapshot sebelum freeze (11,1–15,5 bp). 45 snapshot
+   forward (9 panggilan × 5 pair) memberi median: BTC 16,2 bp · ETH 4,7 bp · XRP 10,7 bp ·
+   SOL 9,3 bp · DOGE 15,2 bp. Sampelnya masih kecil dan bergerak antar panggilan, tetapi untuk
+   4 dari 5 pair arahnya **biaya forward lebih rendah atau setara** asumsi backtest; BTC sedikit
+   lebih lebar, sehingga estimasi konservatif tetap dipakai.
 4. **Jam pasar.** Candle 4 jam UTC = 07.00, 11.00, 15.00, 19.00, 23.00, 03.00 WIB. Order yang jatuh
    di jam sepi mengisi di level yang lebih tipis; hal ini muncul sebagai selisih harga fill per
    trade di `orders.jsonl` (bid/ask terbaik ikut direkam).
@@ -181,6 +181,7 @@ diperkirakan sejak awal (dan harusnya muncul di log):
 | Penjadwal cloud | GitHub Actions run #1 sukses (10 detik), tick masuk `19:49:49Z` | https://github.com/ibrafinnn05/uas-indodax-fin02/actions |
 | Filesystem Vercel | percobaan pertama gagal `EROFS` → pindah ke Redis (bukan diabaikan) | log deployment 7 Nov 2026 |
 | Kill switch | `KILL_SWITCH=1` → 5 skip berlabel `kill_switch`, 0 order | `logs/test/killswitch/` |
+| Kill switch produksi (storage) | `/api/kill?on=1` → tick berikutnya `killSwitch: true`, 0 order; `/api/kill?on=0` memulihkan | `logs/raw/calls.jsonl` |
 | Tanpa sinyal | 3 panggilan, 2 candle, 0 order, 0 error | `logs/test/nosignal/` |
 | Gap backtest–forward | backtest jendela 2 candle dihitung dari snapshot candle bot: 0 trade vs forward 0 trade, BTC −1,06% | `logs/raw/candles.json`, dashboard `?format=json` |
 
