@@ -1,0 +1,21 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "regions": ["sin1"],
+  "functions": {
+    "api/tick.js": {
+      "maxDuration": 300
+    },
+    "api/dashboard.js": {
+      "maxDuration": 60,
+      "includeFiles": "data/**"
+    },
+    "api/status.js": {
+      "maxDuration": 30
+    }
+  },
+  "rewrites": [
+    { "source": "/dashboard", "destination": "/api/dashboard" },
+    { "source": "/status", "destination": "/api/status" }
+  ]
+}

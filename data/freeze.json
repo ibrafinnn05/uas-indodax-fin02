@@ -1,0 +1,7 @@
+{
+  "freezeAt": "2026-11-06T12:00:00Z",
+  "dataCutoff": "2026-11-06T12:00:00Z",
+  "note": "Freeze jujur dilakukan 6 November 2026 (bukan 4 November seperti jadwal UAS). Data cutoff = close candle 4 jam terakhir yang tersedia saat freeze. Forward test dimulai saat bot pertama kali dijalankan setelah deploy; commit hash dicatat di README.",
+  "timeframe": "240",
+  "timezone": "UTC untuk candle; WIB (UTC+7) untuk batas hari"
+}

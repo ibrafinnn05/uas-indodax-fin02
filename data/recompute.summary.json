@@ -1,0 +1,84 @@
+{
+  "generatedAt": "2026-11-06T16:09:23.806Z",
+  "freezeAt": "2026-11-06T12:00:00Z",
+  "forwardStatus": "running",
+  "forwardDays": 0.05214001157407407,
+  "backtest": {
+    "startEquity": 100000000,
+    "endEquity": 173456975.19452,
+    "totalReturn": 0.73457,
+    "cagr": 0.201368,
+    "mdd": -0.242864,
+    "mddPeakTs": 1757764800000,
+    "mddTroughTs": 1772280000000,
+    "sharpe": 0.975473,
+    "n": 186,
+    "win": 0.392473,
+    "pf": 1.435837,
+    "avgWin": 0.196597,
+    "avgLoss": -0.084373,
+    "netPnl": 73456975.19452,
+    "totalCost": 25490135.051506,
+    "grossProfit": 267489415.66259,
+    "costShare": 0.095294,
+    "years": 3.002053,
+    "benchmark": {
+      "totalReturn": 1.4734046578719675,
+      "endEquity": 247340465.78719676,
+      "pair": "btc_idr",
+      "mdd": -0.4942617751725513
+    }
+  },
+  "forward": {
+    "startEquity": 100000000,
+    "endEquity": 100000000,
+    "totalReturn": 0,
+    "mdd": 0,
+    "sharpe": null,
+    "n": 0,
+    "win": null,
+    "pf": null,
+    "avgWin": null,
+    "avgLoss": null,
+    "netPnl": 0,
+    "totalCost": 0,
+    "grossProfit": 0,
+    "costShare": null,
+    "wins": 0,
+    "losses": 0,
+    "points": 2
+  },
+  "gap": {
+    "totalReturn": 0,
+    "mdd": 0,
+    "pf": null,
+    "win": null,
+    "trades": 0,
+    "partial": true,
+    "days": 0.05214001157407407,
+    "benchmark": {
+      "totalReturn": -0.004081984857966181,
+      "endEquity": 99591801.51420338,
+      "pair": "btc_idr",
+      "mdd": 0
+    }
+  },
+  "raw": {
+    "calls": 3,
+    "orders": 0,
+    "signals": 0,
+    "equity": 1,
+    "errors": 0,
+    "spreads": 15,
+    "depthSnapshots": 15,
+    "processedCandles": 2
+  },
+  "match": {
+    "expected": 0,
+    "actual": 0,
+    "matched": 0,
+    "matchRate": null,
+    "missing": [],
+    "extra": []
+  }
+}

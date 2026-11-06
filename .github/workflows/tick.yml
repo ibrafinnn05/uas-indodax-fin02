@@ -1,0 +1,44 @@
+name: finn02-tick
+
+# Candle 4 jam Indodax tutup pada 00,04,08,12,16,20 UTC.
+# Panggil pada menit ke-7 (bukan menit 0) supaya tidak bertabrakan dengan
+# jadwal yang paling padat. Bot idempotent per candle, jadi panggilan
+# terlambat tetap aman selama belum lewat satu candle berikutnya.
+on:
+  schedule:
+    - cron: '7 */4 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: finn02-tick
+  cancel-in-progress: false
+
+jobs:
+  tick:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Panggil /api/tick dengan retry terbatas
+        env:
+          TICK_URL: ${{ secrets.TICK_URL }}
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+        run: |
+          set -u
+          if [ -z "${TICK_URL:-}" ] || [ -z "${CRON_SECRET:-}" ]; then
+            echo "TICK_URL atau CRON_SECRET belum diatur di repository secrets."
+            exit 1
+          fi
+          for i in 1 2 3; do
+            code=$(curl -sS -o resp.json -w "%{http_code}" \
+              -H "Authorization: Bearer ${CRON_SECRET}" \
+              --max-time 150 "${TICK_URL}" || echo "000")
+            echo "percobaan ${i}: HTTP ${code}"
+            cat resp.json 2>/dev/null || true
+            echo
+            if [ "${code}" = "200" ] || [ "${code}" = "207" ]; then
+              exit 0
+            fi
+            sleep 20
+          done
+          echo "Gagal setelah 3 percobaan."
+          exit 1

@@ -1,0 +1,67 @@
+{
+  "fetchedAt": "2026-11-06T14:36:44.332Z",
+  "serverTime": "2026-11-06T14:36:43.229Z",
+  "timeframe": "240",
+  "start": "2023-11-06T00:00:00.000Z",
+  "end": "2026-11-06T14:36:43.000Z",
+  "universeMeta": {
+    "selectedAt": "2026-11-06T14:35:48.066Z",
+    "method": "Semua pair IDR ber-coingecko_id yang terdaftar di API publik; diperingkat dari turnover (close x volume) 30 hari pertama backtest 2023-11-06 s/d 2023-12-06. Bukan volume hari ini.",
+    "periodStart": "2023-11-06T00:00:00Z",
+    "candidatesWithData": 124,
+    "candidatesChecked": 399,
+    "note": "API publik hanya memuat pair yang masih ada hari ini. Pair yang delisting sebelum freeze tidak bisa dipilih; ini keterbatasan data, bukan aturan."
+  },
+  "pairs": [
+    {
+      "pair": "btc_idr",
+      "symbol": "BTCIDR",
+      "pages": 2,
+      "bars": 6579,
+      "first": "2023-11-06T00:00:00.000Z",
+      "last": "2026-11-06T08:00:00.000Z",
+      "gaps": 0,
+      "gapSamples": []
+    },
+    {
+      "pair": "eth_idr",
+      "symbol": "ETHIDR",
+      "pages": 2,
+      "bars": 6579,
+      "first": "2023-11-06T00:00:00.000Z",
+      "last": "2026-11-06T08:00:00.000Z",
+      "gaps": 0,
+      "gapSamples": []
+    },
+    {
+      "pair": "xrp_idr",
+      "symbol": "XRPIDR",
+      "pages": 2,
+      "bars": 6579,
+      "first": "2023-11-06T00:00:00.000Z",
+      "last": "2026-11-06T08:00:00.000Z",
+      "gaps": 0,
+      "gapSamples": []
+    },
+    {
+      "pair": "sol_idr",
+      "symbol": "SOLIDR",
+      "pages": 2,
+      "bars": 6579,
+      "first": "2023-11-06T00:00:00.000Z",
+      "last": "2026-11-06T08:00:00.000Z",
+      "gaps": 0,
+      "gapSamples": []
+    },
+    {
+      "pair": "doge_idr",
+      "symbol": "DOGEIDR",
+      "pages": 2,
+      "bars": 6579,
+      "first": "2023-11-06T00:00:00.000Z",
+      "last": "2026-11-06T08:00:00.000Z",
+      "gaps": 0,
+      "gapSamples": []
+    }
+  ]
+}

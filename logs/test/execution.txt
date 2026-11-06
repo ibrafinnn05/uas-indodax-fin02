@@ -1,0 +1,28 @@
+=== UJI EKSEKUSI & KONSISTENSI KODE (bukan forward test) ===
+waktu: 2026-11-06T16:08:29.445Z
+PASS  backtest & bot sama-sama import signalAt dari lib/strategy.js — tidak ada duplikasi logika sinyal
+PASS  signalAt eksport tunggal
+PASS  snapshot order book punya bid & ask — bid 1364929000 ask 1367118000 spread 16.0 bp
+PASS  beli terealisasi >= ask (tidak pernah di mid/bawah ask) — vwap 1367118000 vs ask 1367118000
+PASS  jual terealisasi di bawah bid (bukan mid) — vwap 1364537564.514758 vs bid 1364929000
+PASS  order 25 juta terisi penuh di level — 1 level beli, 2 level jual
+PASS  fee beli = 0,20555% (taker all-in resmi) — 51388 rupiah
+PASS  fee jual = 0,41555% — 103858 rupiah
+PASS  minimum order >= Rp25.000 — 25000000
+PASS  sizing menghasilkan qty
+PASS  risiko per trade <= 1% equity — risiko 1.000%
+PASS  notional per nama <= 20% equity
+PASS  stop di bawah harga masuk — stop 1298762100
+PASS  exit waktu = entry + maxHoldBars candle — 120 bar x 4 jam = 480 jam
+PASS  exit hanya stop (harga) atau waktu — tanpa trailing/TP/fundamental
+PASS  sinyal dihitung ulang dari CSV mentah — 430 bar sinyal dari 6579 bar BTC/IDR
+PASS  P&L trade = (jual-beli)*qty - fee — sol_idr recomputed 76415 vs log 76415
+PASS  fee transaksi ikut tercatat di trade — beli 7579 jual 15737
+PASS  BTCIDR candle nyata & tanpa celah — 6579 bar, 2023-11-06T00:00:00.000Z → 2026-11-06T08:00:00.000Z
+PASS  ETHIDR candle nyata & tanpa celah — 6579 bar, 2023-11-06T00:00:00.000Z → 2026-11-06T08:00:00.000Z
+PASS  XRPIDR candle nyata & tanpa celah — 6579 bar, 2023-11-06T00:00:00.000Z → 2026-11-06T08:00:00.000Z
+PASS  SOLIDR candle nyata & tanpa celah — 6579 bar, 2023-11-06T00:00:00.000Z → 2026-11-06T08:00:00.000Z
+PASS  DOGEIDR candle nyata & tanpa celah — 6579 bar, 2023-11-06T00:00:00.000Z → 2026-11-06T08:00:00.000Z
+PASS  engine jalan tanpa error pada data kosong
+
+SEMUA UJI LULUS (24 pemeriksaan)

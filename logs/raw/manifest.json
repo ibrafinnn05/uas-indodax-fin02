@@ -1,0 +1,22 @@
+{
+  "exportedAt": "2026-11-06T16:09:22.792Z",
+  "storeMode": "local",
+  "counts": {
+    "calls": 3,
+    "orders": 0,
+    "signals": 0,
+    "equity": 1,
+    "errors": 0,
+    "depth": 15,
+    "spreads": 15
+  },
+  "stateStartedAt": "2026-11-06T14:54:18.909Z",
+  "lastTick": {
+    "ts": "2026-11-06T16:09:19.049Z",
+    "equity": 100000000,
+    "pairsOk": 5,
+    "pairsInvalid": 0,
+    "orders": 0
+  },
+  "note": "File ini adalah ekspor mentah dari store. Dashboard dan hitung_ulang hanya membaca file ini (dan data/raw), bukan angka yang ditulis tangan."
+}

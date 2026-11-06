@@ -1,0 +1,23 @@
+{
+  "name": "finn02-indodax-dryrun",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "UAS Algorithmic Trading - FINN 02 di Indodax (dry run, long-only)",
+  "scripts": {
+    "universe": "node scripts/select_universe.js",
+    "fetch": "node scripts/fetch_history.js",
+    "depth": "node scripts/collect_depth.js",
+    "backtest": "node scripts/backtest.js",
+    "tick": "node scripts/tick_local.js",
+    "export": "node scripts/export_logs.js",
+    "hitung": "node scripts/hitung_ulang.js",
+    "dashboard": "node scripts/build_dashboard.js",
+    "test": "node scripts/test_execution.js",
+    "build": "node scripts/hitung_ulang.js",
+    "zip": "node scripts/make_zip.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
