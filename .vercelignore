@@ -1,0 +1,11 @@
+# File yang tidak boleh ikut ke deployment Vercel.
+# Vercel CLI tidak membaca .gitignore untuk deploy langsung, jadi daftar ini wajib.
+.env
+.env.*
+!.env.example
+.tick_secret
+data/local_store.json
+logs/remote/
+dist/
+.gitignore
+*.log

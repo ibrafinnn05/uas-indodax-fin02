@@ -8,3 +8,8 @@ dist/
 *.log
 .DS_Store
 Thumbs.db
+
+.vercel
+.env*
+.tick_secret
+logs/remote/

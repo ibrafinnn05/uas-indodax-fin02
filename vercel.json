@@ -17,5 +17,8 @@
   "rewrites": [
     { "source": "/dashboard", "destination": "/api/dashboard" },
     { "source": "/status", "destination": "/api/status" }
+  ],
+  "crons": [
+    { "path": "/api/tick", "schedule": "7 0 * * *" }
   ]
 }

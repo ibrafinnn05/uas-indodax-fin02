@@ -1,10 +1,10 @@
 {
- "generatedAt": "2026-11-06T16:30:10.881Z",
+ "generatedAt": "2026-11-06T19:11:41.977Z",
  "summary": {
-  "generatedAt": "2026-11-06T16:30:10.881Z",
+  "generatedAt": "2026-11-06T19:11:41.977Z",
   "freezeAt": "2026-11-06T12:00:00Z",
   "forwardStatus": "running",
-  "forwardDays": 0.06657375,
+  "forwardDays": 0.006214178240740741,
   "backtest": {
    "startEquity": 100000000,
    "endEquity": 173456975.19452,
@@ -48,7 +48,7 @@
    "costShare": null,
    "wins": 0,
    "losses": 0,
-   "points": 2
+   "points": 3
   },
   "gap": {
    "totalReturn": 0,
@@ -57,23 +57,18 @@
    "win": null,
    "trades": 0,
    "partial": true,
-   "days": 0.06657375,
-   "benchmark": {
-    "totalReturn": -0.004081984857966181,
-    "endEquity": 99591801.51420338,
-    "pair": "btc_idr",
-    "mdd": 0
-   }
+   "days": 0.006214178240740741,
+   "benchmark": null
   },
   "raw": {
-   "calls": 3,
+   "calls": 4,
    "orders": 0,
    "signals": 0,
    "equity": 1,
    "errors": 0,
-   "spreads": 15,
-   "depthSnapshots": 15,
-   "processedCandles": 2
+   "spreads": 20,
+   "depthSnapshots": 20,
+   "processedCandles": 1
   },
   "match": {
    "expected": 0,
@@ -85,7 +80,7 @@
   }
  },
  "model": {
-  "generatedAt": "2026-11-06T16:30:10.881Z",
+  "generatedAt": "2026-11-06T19:11:41.977Z",
   "freeze": {
    "freezeAt": "2026-11-06T12:00:00Z",
    "dataCutoff": "2026-11-06T12:00:00Z",
@@ -180,7 +175,7 @@
   },
   "backtest": {
    "meta": {
-    "generatedAt": "2026-11-06T16:30:10.846Z",
+    "generatedAt": "2026-11-06T19:11:41.949Z",
     "freezeAt": "2026-11-06T12:00:00.000Z",
     "timeframe": "240",
     "start": "2023-11-06T00:00:00.000Z",
@@ -57739,9 +57734,9 @@
   },
   "forward": {
    "status": "running",
-   "startedAt": "2026-11-06T14:54:18.909Z",
-   "now": "2026-11-06T16:30:10.881Z",
-   "daysElapsed": 0.06657375,
+   "startedAt": "2026-11-06T19:02:45.072Z",
+   "now": "2026-11-06T19:11:41.977Z",
+   "daysElapsed": 0.006214178240740741,
    "daysTarget": 10,
    "source": "logs/raw (file mentah)",
    "metrics": {
@@ -57761,23 +57756,23 @@
     "costShare": null,
     "wins": 0,
     "losses": 0,
-    "points": 2
+    "points": 3
    },
    "raw": {
-    "calls": 3,
+    "calls": 4,
     "orders": 0,
     "signals": 0,
     "equity": 1,
     "errors": 0,
-    "spreads": 15,
-    "depthSnapshots": 15,
-    "processedCandles": 2
+    "spreads": 20,
+    "depthSnapshots": 20,
+    "processedCandles": 1
    },
    "ops": {
-    "expected": 2,
-    "executed": 2,
+    "expected": 1,
+    "executed": 1,
     "uptime": 1,
-    "calls": 3,
+    "calls": 4,
     "errors": 0,
     "killSwitchUses": 0,
     "lateCalls": 0
@@ -57788,13 +57783,13 @@
     "positions": [],
     "pending": [],
     "day": {
-     "date": "2026-11-06",
+     "date": "2026-11-07",
      "startEquity": 100000000,
      "blocked": false
     },
     "killSwitch": false,
     "lastTick": {
-     "ts": "2026-11-06T16:09:19.049Z",
+     "ts": "2026-11-06T19:11:15.802Z",
      "equity": 100000000,
      "pairsOk": 5,
      "pairsInvalid": 0,
@@ -57805,17 +57800,21 @@
      "trades": 0,
      "fees": 0
     },
-    "startedAt": "2026-11-06T14:54:18.909Z"
+    "startedAt": "2026-11-06T19:02:45.072Z"
    },
    "orders": [],
    "signals": [],
    "equityPoints": [
     {
-     "ts": 1793976858124,
+     "ts": 1793991765072,
      "equity": 100000000
     },
     {
-     "ts": 1793981359049,
+     "ts": 1793991765229,
+     "equity": 100000000
+    },
+    {
+     "ts": 1793992275802,
      "equity": 100000000
     }
    ],
@@ -57825,8 +57824,8 @@
      "pair": "btc_idr",
      "symbol": "BTCIDR",
      "backtestBps": 15.390565678017849,
-     "forwardBps": 2.7104891558574984,
-     "forwardN": 3,
+     "forwardBps": 21.93899062391058,
+     "forwardN": 4,
      "buySlipBps": 0,
      "sellSlipBps": 0
     },
@@ -57834,8 +57833,8 @@
      "pair": "eth_idr",
      "symbol": "ETHIDR",
      "backtestBps": 11.1170127351557,
-     "forwardBps": 7.936114280045633,
-     "forwardN": 3,
+     "forwardBps": 0.7436019253565788,
+     "forwardN": 4,
      "buySlipBps": 2.9395248910339022,
      "sellSlipBps": 0
     },
@@ -57843,8 +57842,8 @@
      "pair": "xrp_idr",
      "symbol": "XRPIDR",
      "backtestBps": 15.382105483953668,
-     "forwardBps": 2.788752033465024,
-     "forwardN": 3,
+     "forwardBps": 11.909836942748777,
+     "forwardN": 4,
      "buySlipBps": 0,
      "sellSlipBps": 0
     },
@@ -57852,8 +57851,8 @@
      "pair": "sol_idr",
      "symbol": "SOLIDR",
      "backtestBps": 15.505352398812315,
-     "forwardBps": 5.4613529860588885,
-     "forwardN": 3,
+     "forwardBps": 7.677904406663474,
+     "forwardN": 4,
      "buySlipBps": 0,
      "sellSlipBps": 0
     },
@@ -57861,16 +57860,16 @@
      "pair": "doge_idr",
      "symbol": "DOGEIDR",
      "backtestBps": 15.24390243902439,
-     "forwardBps": 15.19756838905775,
-     "forwardN": 3,
+     "forwardBps": 15.191798621256286,
+     "forwardN": 4,
      "buySlipBps": 0,
      "sellSlipBps": 0
     }
    ],
    "window": {
-    "start": "2026-11-06T08:00:00.000Z",
+    "start": "2026-11-06T12:00:00.000Z",
     "end": "2026-11-06T12:00:00.999Z",
-    "startMs": 1793952000000,
+    "startMs": 1793966400000,
     "endMs": 1793966400999,
     "metrics": {
      "startEquity": 100000000,
@@ -57890,17 +57889,10 @@
      "totalCost": 0,
      "grossProfit": 0,
      "costShare": null,
-     "years": 0.0004563401209217431,
+     "years": 3.165639972621492e-8,
      "trades": [],
      "signals": [],
      "equity": [
-      {
-       "ts": 1793952000000,
-       "equity": 100000000,
-       "cash": 100000000,
-       "invested": 0,
-       "nPos": 0
-      },
       {
        "ts": 1793966400000,
        "equity": 100000000,
@@ -57910,18 +57902,8 @@
       }
      ],
      "openPositions": [],
-     "benchmark": {
-      "totalReturn": -0.004081984857966181,
-      "endEquity": 99591801.51420338,
-      "pair": "btc_idr",
-      "mdd": 0
-     },
-     "benchmarkPoints": [
-      {
-       "ts": 1793966400000,
-       "equity": 100007382.19089766
-      }
-     ]
+     "benchmark": null,
+     "benchmarkPoints": []
     },
     "trades": [],
     "signals": [],
@@ -57941,13 +57923,8 @@
     "win": null,
     "trades": 0,
     "partial": true,
-    "days": 0.06657375,
-    "benchmark": {
-     "totalReturn": -0.004081984857966181,
-     "endEquity": 99591801.51420338,
-     "pair": "btc_idr",
-     "mdd": 0
-    }
+    "days": 0.006214178240740741,
+    "benchmark": null
    }
   },
   "costs": {
@@ -58077,20 +58054,20 @@
   "reconciliation": {
    "logsSource": "logs/raw (file mentah)",
    "manifest": {
-    "exportedAt": "2026-11-06T16:09:22.792Z",
-    "storeMode": "local",
+    "exportedAt": "2026-11-06T19:11:41.146Z",
+    "storeMode": "redis",
     "counts": {
-     "calls": 3,
+     "calls": 4,
      "orders": 0,
      "signals": 0,
      "equity": 1,
      "errors": 0,
-     "depth": 15,
-     "spreads": 15
+     "depth": 20,
+     "spreads": 20
     },
-    "stateStartedAt": "2026-11-06T14:54:18.909Z",
+    "stateStartedAt": "2026-11-06T19:02:45.072Z",
     "lastTick": {
-     "ts": "2026-11-06T16:09:19.049Z",
+     "ts": "2026-11-06T19:11:15.802Z",
      "equity": 100000000,
      "pairsOk": 5,
      "pairsInvalid": 0,

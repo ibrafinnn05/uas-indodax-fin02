@@ -8,14 +8,17 @@ const DIST = path.join(ROOT, 'dist');
 const ZIP = path.join(DIST, 'uas-indodax-submit.zip');
 
 const EXCLUDE_DIRS = new Set(['node_modules', '.vercel', 'dist', '.next', 'coverage']);
-const EXCLUDE_FILES = new Set(['local_store.json', '.env', 'Thumbs.db', '.DS_Store']);
+const EXCLUDE_FILES = new Set(['local_store.json', '.env', 'Thumbs.db', '.DS_Store', '.tick_secret']);
 
 function keep(src) {
   const base = path.basename(src);
   if (src === ROOT) return true;
   if (EXCLUDE_DIRS.has(base)) return false;
   if (EXCLUDE_FILES.has(base)) return false;
+  // Semua file .env* kecuali contoh, dan log pemicu lokal.
+  if (base.startsWith('.env') && base !== '.env.example') return false;
   if (base.endsWith('.log')) return false;
+  if (path.relative(ROOT, src).split(path.sep).join('/').startsWith('logs/remote/')) return false;
   return true;
 }
 

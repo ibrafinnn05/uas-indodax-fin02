@@ -4,9 +4,10 @@ Dokumen ini menjelaskan **selisihnya dalam angka**. Semua angka di bawah berasal
 `data/backtest/result.json` (backtest) dan `logs/raw/` (forward), dan bisa dihitung ulang dengan
 `npm run hitung`.
 
-> **Status forward saat pengumpulan: parsial.** Freeze 6 Nov 2026 19.00 WIB; bot mulai berjalan
-> pada panggilan pertama `2026-11-06 21.54 WIB`. Tenggat UAS 14 Nov membuat forward 10 hari penuh
-> tidak mungkin selesai. Dashboard menandainya "parsial"; angka forward **bukan hasil final**.
+> **Status forward saat pengumpulan: parsial.** Freeze 6 Nov 2026 19.00 WIB; bot live di Vercel dan
+> mulai berjalan pada panggilan produksi pertama `2026-11-07 02.02 WIB` (storage Upstash Redis).
+> Tenggat UAS 14 Nov membuat forward 10 hari penuh tidak mungkin selesai. Dashboard menandainya
+> "parsial"; angka forward **bukan hasil final**.
 
 ---
 
@@ -14,28 +15,28 @@ Dokumen ini menjelaskan **selisihnya dalam angka**. Semua angka di bawah berasal
 
 | Metrik | Nilai | Sumber |
 |---|---:|---|
-| Hari berjalan | 0,05 hari dari 10 | `logs/raw/state.json` |
-| Panggilan tercatat | 3 | `logs/raw/calls.jsonl` |
-| Candle terproses tepat waktu | 2 / 2 (**100%**) | `processedCandles` + definisi uptime |
+| Hari berjalan | 0,006 hari dari 10 | `logs/raw/state.json` |
+| Panggilan tercatat | 4 (termasuk panggilan uji pemicu) | `logs/raw/calls.jsonl` |
+| Candle terproses tepat waktu | 1 / 1 (**100%**) | `processedCandles` + definisi uptime |
 | Error API/data | 0 | `logs/raw/errors.jsonl` |
 | Pemakaian kill switch (produksi) | 0× | `logs/raw/calls.jsonl` |
 | Order simulasi | 0 | `logs/raw/orders.jsonl` |
 | Sinyal / skip | 0 sinyal, 0 skip | `logs/raw/signals.jsonl` |
 | Equity | Rp100.000.000 (0,00%) | `logs/raw/equity.jsonl` + state |
-| Snapshot spread forward | 15 (3 per pasangan) | `logs/raw/spreads.jsonl` |
-| Snapshot order book mentah | 15 | `logs/raw/depth.jsonl` |
+| Snapshot spread forward | 20 (5 per panggilan) | `logs/raw/spreads.jsonl` |
+| Snapshot order book mentah | 20 | `logs/raw/depth.jsonl` |
 
 **Kenapa belum ada trade?** Bukan karena bot tidak jalan: candle terakhir yang tertutup
-(2026-11-06 15.00 WIB) tidak memenuhi syarat masuk pada **kelima** pasangan sekaligus.
-Angka pada candle 08.00 UTC (divalidasi dengan kode backtest yang sama):
+(2026-11-06 19.00 WIB) tidak memenuhi syarat masuk pada **kelima** pasangan sekaligus.
+Angka pada candle 12.00 UTC (divalidasi dengan kode backtest yang sama):
 
 | Pair | Close | HHV20 | MA50 | Close > HHV20? | Close > MA50? |
 |---|---:|---:|---:|---|---|
-| BTC/IDR | 1.375.031.000 | 1.468.996.000 | 1.418.437.280 | tidak | tidak |
-| ETH/IDR | 40.500.000 | 44.291.000 | 41.415.200 | tidak | tidak |
-| XRP/IDR | 21.617 | 24.245 | 22.883 | tidak | tidak |
-| SOL/IDR | 1.631.764 | 1.776.000 | 1.714.914 | tidak | tidak |
-| DOGE/IDR | 1.312 | 1.415 | 1.365,54 | tidak | tidak |
+| BTC/IDR | 1.369.178.000 | 1.468.996.000 | 1.416.920.840 | tidak | tidak |
+| ETH/IDR | 40.354.000 | 44.291.000 | 41.386.140 | tidak | tidak |
+| XRP/IDR | 21.481 | 24.245 | 22.846 | tidak | tidak |
+| SOL/IDR | 1.641.000 | 1.776.000 | 1.711.626 | tidak | tidak |
+| DOGE/IDR | 1.321 | 1.415 | 1.364 | tidak | tidak |
 
 Pasar sedang di bawah rata-rata 50 bar setelah penurunan, jadi tidak ada breakout. Backtest pada
 jendela yang sama juga menghasilkan **0 sinyal** → kecocokan sinyal **0/0**. Rubrik UAS memang
@@ -120,18 +121,19 @@ sesuai temuan out-of-sample.
 Kalau bot di-deploy dan berjalan sampai 10 hari, sumber selisih backtest vs forward sudah
 diperkirakan sejak awal (dan harusnya muncul di log):
 
-1. **Keterlambatan jadwal.** GitHub Actions sering terlambat 5–30 menit; batas candle berikutnya
-   adalah 4 jam. Candle yang diproses setelah batas itu **tidak dihitung uptime** (definisi resmi).
-   Menit ke-7 dipilih agar tidak menumpuk di menit ke-0. Waktu tiap panggilan tercatat di
-   `calls.jsonl` dan dipakai langsung untuk angka uptime.
+1. **Keterlambatan jadwal.** Penjadwal (Task Scheduler sekarang, GitHub Actions bila repo tersedia)
+   bisa terlambat beberapa menit; batas candle berikutnya adalah 4 jam. Candle yang diproses setelah
+   batas itu **tidak dihitung uptime** (definisi resmi). Menit ke-7 dipilih agar tidak menumpuk di
+   menit ke-0. Waktu tiap panggilan tercatat di `calls.jsonl` dan dipakai langsung untuk angka uptime.
 2. **Isi order berbeda secara struktural.** Backtest mengisi limit pada `min(open, limit)` di candle
    berikutnya bila `low < limit`; bot mengisi hanya bila `ask <= limit` pada order book live.
    Artinya bot **lebih lambat dan lebih konservatif** — tidak akan ada fill yang lebih baik dari
    backtest karena dibuat di mid/close.
-3. **Spread & slippage.** Backtest memakai median snapshot sebelum freeze (11,1–15,5 bp). 15 snapshot
-   forward pertama menunjukkan median lebih rendah (BTC 2,7 bp, ETH 7,9 bp, XRP 2,8 bp, SOL 5,5 bp,
-   DOGE 15,2 bp; n=3 per pasangan). Sampelnya masih kecil, tetapi arahnya: **biaya forward
-   kemungkinan sedikit lebih baik** daripada asumsi backtest.
+3. **Spread & slippage.** Backtest memakai median snapshot sebelum freeze (11,1–15,5 bp). 20 snapshot
+   forward pertama (4 panggilan × 5 pair) memberi median: BTC 21,9 bp · ETH 0,7 bp · XRP 11,9 bp ·
+   SOL 7,7 bp · DOGE 15,2 bp. Sampelnya masih kecil dan bergerak antar panggilan, tetapi untuk 4 dari
+   5 pair arahnya **biaya forward lebih rendah atau setara** asumsi backtest; BTC justru lebih lebar
+   (21,9 vs 15,4 bp), sehingga estimasi konservatif tetap dipakai.
 4. **Jam pasar.** Candle 4 jam UTC = 07.00, 11.00, 15.00, 19.00, 23.00, 03.00 WIB. Order yang jatuh
    di jam sepi mengisi di level yang lebih tipis; hal ini muncul sebagai selisih harga fill per
    trade di `orders.jsonl` (bid/ask terbaik ikut direkam).
@@ -152,8 +154,11 @@ diperkirakan sejak awal (dan harusnya muncul di log):
 | Data candle asli | 6.579 bar/pasangan, 0 celah, 2023-11-06 → 2026-11-06 | `logs/test/execution.txt` |
 | Hitung ulang P&L satu trade | cocok sampai Rp1 dari log | `logs/test/execution.txt` |
 | Idempotency | panggilan kedua candle sama → 0 candle diproses | `logs/raw/calls.jsonl` |
+| Idempotency di produksi (Vercel) | panggilan ke-2 dan ke-3 → `processedCandles: []` | `logs/raw/calls.jsonl` |
+| Deploy Vercel + Redis | tick produksi 200 OK, 5 pair valid, 0 error, state di Redis | catatan deploy 7 Nov 2026 |
+| Filesystem Vercel | percobaan pertama gagal `EROFS` → pindah ke Redis (bukan diabaikan) | log deployment 7 Nov 2026 |
 | Kill switch | `KILL_SWITCH=1` → 5 skip berlabel `kill_switch`, 0 order | `logs/test/killswitch/` |
-| Tanpa sinyal | 3 panggilan, 2 candle, 0 order, 0 error | `logs/raw/` |
+| Tanpa sinyal | 3 panggilan, 2 candle, 0 order, 0 error | `logs/test/nosignal/` |
 
 ---
 

@@ -1,5 +1,6 @@
 import crypto from 'node:crypto';
 import { runTick } from '../lib/tick.js';
+import { getStore } from '../lib/store.js';
 
 function safeEqual(a, b) {
   const ba = Buffer.from(String(a));
@@ -30,8 +31,12 @@ export default async function handler(req, res) {
   }
   try {
     const out = await runTick({ source: 'vercel' });
+    if (out?.error === 'locked') {
+      console.warn('tick locked', JSON.stringify({ ts: out.ts, mode: getStore()?.mode }));
+    }
     return res.status(out.ok ? 200 : 207).json(out);
   } catch (e) {
+    console.error('tick error:', e?.stack || String(e));
     return res.status(500).json({ ok: false, error: e.message });
   }
 }

@@ -6,13 +6,16 @@ book sungguhan, menghitung sinyal dengan **fungsi yang sama dengan backtest**, l
 **order simulasi di harga bid/ask**.
 
 > **Status jujur (baca dulu).**
+> - **Bot sudah live** di https://uas-indodax-fin02.vercel.app (dashboard `/dashboard`, status `/status`)
+>   dengan storage Upstash Redis dan pemicu otomatis tiap 4 jam.
 > - Freeze dilakukan **6 November 2026, 19.00 WIB**, melewati jadwal UAS 4 November 2026 12.00 WIB.
 >   Alasan: persiapan berjalan di luar jadwal. Keterlambatan ini dicatat, bukan disembunyikan.
-> - Karena tenggat 14 November, **forward test 10 hari penuh tidak mungkin selesai**. Bot berjalan
->   mulai freeze; angka forward pada dashboard adalah **hasil sementara** dan ditandai "parsial".
+> - Karena tenggat 14 November, **forward test 10 hari penuh tidak mungkin selesai**. Forward baru
+>   berjalan sejak 7 November 2026 02.02 WIB; angka forward pada dashboard adalah **hasil sementara**
+>   dan ditandai "parsial".
 > - Yang paling kuat tersedia sebelum forward lengkap adalah **backtest out-of-sample** (1 tahun terakhir
 >   yang tidak dipakai saat memilih parameter).
-> - Tidak ada angka forward yang ditulis tangan. Semua dihitung ulang dari `logs/raw/`.
+> - Tidak ada angka forward yang ditulis tangan. Semua dihitung ulang dari `logs/raw/` (hasil ekspor Redis).
 
 ---
 
@@ -118,13 +121,16 @@ Hash dan waktunya tercatat di bagian 7 di bawah.
 
 ### 4.2 Storage (wajib)
 
-Filesystem Vercel tidak permanen, jadi state/log disimpan di **Upstash Redis**:
+Filesystem Vercel **read-only** (percobaan pertama bot gagal dengan `EROFS: read-only file system`),
+jadi state/log disimpan di **Upstash Redis**:
 
-1. Buka Vercel → project → **Storage** → **Upstash Redis** (paket gratis) → create.
-2. Salin `UPSTASH_REDIS_REST_URL` dan `UPSTASH_REDIS_REST_TOKEN`.
+1. Vercel → project → **Storage** → marketplace **Upstash for Redis** (paket gratis) → create.
+   Bisa juga dari CLI: `vercel integration add upstash/upstash-kv` (perlu menerima terms di browser sekali).
+2. Marketplace menulis variabel **`KV_REST_API_URL`** dan **`KV_REST_API_TOKEN`**.
+   `lib/store.js` menerima keduanya maupun nama asli Upstash (`UPSTASH_REDIS_REST_URL/TOKEN`).
 
-Tanpa storage ini, bot tetap jalan di laptop dengan `data/local_store.json`, tetapi **tidak memenuhi
-syarat UAS** (state harus persisten).
+Tanpa storage ini, bot tetap jalan di laptop dengan `data/local_store.json` (sudah terbukti), tetapi
+**tidak bisa** jalan di Vercel karena file system-nya tidak bisa ditulis.
 
 ### 4.3 Environment variables
 
@@ -151,7 +157,15 @@ Region `sin1` (Singapura) sudah dipilih di `vercel.json` agar dekat ke Indodax.
 
 ### 4.5 Penjadwal (cron 4 jam)
 
-Vercel Cron Hobby hanya sekali sehari, jadi penjadwal utama adalah **GitHub Actions**
+> **Status nyata saat pengumpulan:** bot sudah berjalan di
+> **https://uas-indodax-fin02.vercel.app** (dashboard `/dashboard`, status `/status`) dengan
+> storage Upstash Redis. Pemicu 4 jam dipasang lewat **Windows Task Scheduler**
+> (`scripts/tick_remote.ps1`, menit ke-7 tiap 4 jam) karena repository GitHub belum tersedia saat deploy.
+> Sebagai jaring pengaman, `vercel.json` juga memuat cron harian `7 0 * * *` (batas plan Hobby).
+> Workflow GitHub Actions di bawah tetap disediakan dan **direkomendasikan** untuk menggantikan Task
+> Scheduler begitu repository GitHub ada — cukup isi dua secrets, tanpa mengubah kode.
+
+Vercel Cron Hobby hanya sekali sehari, jadi penjadwal utama yang disarankan adalah **GitHub Actions**
 (`.github/workflows/tick.yml`, `cron: '7 */4 * * *'` UTC = 07.07, 11.07, 15.07, 19.07,
 23.07, 03.07 WIB). Menit ke-7 dipilih agar tidak menumpuk di menit ke-0.
 
@@ -168,8 +182,11 @@ curl -H "Authorization: Bearer $CRON_SECRET" https://<project>.vercel.app/api/ti
 
 ### 4.6 Link setelah deploy
 
-- Dashboard live: `https://<project>.vercel.app/dashboard` (atau `/api/dashboard`)
-- Status operasional: `https://<project>.vercel.app/status`
+Deployment yang dipakai saat pengumpulan:
+
+- Dashboard live: https://uas-indodax-fin02.vercel.app/dashboard (atau `/api/dashboard`, `?format=json` untuk data mentah)
+- Status operasional: https://uas-indodax-fin02.vercel.app/status
+- Endpoint tick: `POST/GET https://uas-indodax-fin02.vercel.app/api/tick` (wajib header `Authorization: Bearer <CRON_SECRET>`)
 - Dashboard offline: `public/index.html` (bisa dibuka tanpa internet)
 
 ---

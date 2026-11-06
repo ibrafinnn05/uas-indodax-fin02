@@ -13,6 +13,7 @@
     "export": "node scripts/export_logs.js",
     "hitung": "node scripts/hitung_ulang.js",
     "dashboard": "node scripts/build_dashboard.js",
+    "vercel-build": "node scripts/build_dashboard.js",
     "test": "node scripts/test_execution.js",
     "build": "node scripts/hitung_ulang.js",
     "zip": "node scripts/make_zip.js"
