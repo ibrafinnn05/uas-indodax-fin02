@@ -29,7 +29,7 @@ Modal virtual Rp100.000.000. Candle 4 jam Indodax, 2023-11-06 → 2026-11-06 (fr
 | In-sample 2023-11 → 2025-11 | +58,48% | +25,87% | −18,07% | 1,47 | 132 | +212,99% |
 | Out-of-sample 2025-11 → freeze | **+9,45%** | +9,44% | −10,43% | 1,34 | 54 | −21,85% (MDD −41,19%) |
 | 10 hari terakhir sebelum freeze | −1,99% | — | −2,30% | — | 2 | −6,08% |
-| Forward (berjalan, parsial) | 0,00% | — | 0,00% | — | 0 | 2 candle; lihat dashboard |
+| Forward (berjalan, parsial) | 0,00% | — | 0,00% | — | 0 | 4 candle; lihat dashboard |
 
 - Biaya total backtest Rp25.490.135 = **9,53% dari laba kotor** (fee + spread + slippage).
 - Sinyal masuk: **limit buy** pada `close − 1,1 ATR`; exit hanya **stop (5 ATR)** atau **waktu (120 bar)**.
@@ -259,6 +259,7 @@ menulis ulang riwayat setelahnya. Isi commit dicatat ulang pada commit kedua
 | `3cb9024` | badge forward menampilkan `PARSIAL x/10 hari` | transparansi status |
 | `bf25971` | dokumentasi GitHub Actions sebagai penjadwal cloud | penjadwal tidak boleh bergantung laptop |
 | commit dokumentasi ini | snapshot candle bot (`logs/raw/candles.json`) + backtest jendela forward di dashboard live + tabel statistik trade wajib UAS | kelengkapan metrik dashboard; tidak mengubah logika sinyal |
+| commit ini | panel **posisi terbuka / order pending / papan pantau** di dashboard + toleransi uptime sampai candle berikutnya tutup | menjawab kebutuhan monitoring tanpa membuat trade palsu; mencegah uptime turun palsu tepat sebelum jadwal |
 
 Tidak ada perubahan pada `lib/strategy.js`, `lib/config.js`, `lib/universe.js`, maupun parameter
 yang tercatat di `data/freeze.json`. Perubahan di atas hanya menambah cara **membaca dan

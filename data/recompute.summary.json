@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-11-06T21:32:21.360Z",
+  "generatedAt": "2026-11-07T05:54:48.540Z",
   "freezeAt": "2026-11-06T12:00:00Z",
   "forwardStatus": "running",
-  "forwardDays": 0.10389222222222222,
+  "forwardDays": 0.45281791666666665,
   "backtest": {
     "startEquity": 100000000,
     "endEquity": 173456975.19452,
@@ -55,23 +55,23 @@
     "win": null,
     "trades": 0,
     "partial": true,
-    "days": 0.10389222222222222,
+    "days": 0.45281791666666665,
     "benchmark": {
-      "totalReturn": -0.01064129276657988,
-      "endEquity": 98935870.72334202,
+      "totalReturn": -0.010021406487510598,
+      "endEquity": 98997859.35124893,
       "pair": "btc_idr",
-      "mdd": 0
+      "mdd": -0.0008150214498496844
     }
   },
   "raw": {
-    "calls": 9,
+    "calls": 12,
     "orders": 0,
     "signals": 0,
     "equity": 1,
     "errors": 0,
-    "spreads": 45,
-    "depthSnapshots": 45,
-    "processedCandles": 2
+    "spreads": 60,
+    "depthSnapshots": 60,
+    "processedCandles": 4
   },
   "match": {
     "expected": 0,
