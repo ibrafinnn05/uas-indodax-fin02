@@ -16,34 +16,34 @@ Dokumen ini menjelaskan **selisihnya dalam angka**. Semua angka di bawah berasal
 
 | Metrik | Nilai | Sumber |
 |---|---:|---|
-| Hari berjalan | 0,45 hari dari 10 | `logs/raw/state.json` |
-| Panggilan tercatat | 12 (termasuk uji manual GitHub Actions + uji kill switch) | `logs/raw/calls.jsonl` |
-| Candle terproses tepat waktu | 4 / 4 (**100%**) | `processedCandles` + definisi uptime |
+| Hari berjalan | **7,89 hari dari 10** | `logs/raw/state.json` |
+| Panggilan tercatat | **63** (termasuk uji manual GitHub Actions + uji kill switch) | `logs/raw/calls.jsonl` |
+| Candle terproses tepat waktu | **48 / 48 (100%)** | `processedCandles` + definisi uptime |
 | Error API/data | 0 | `logs/raw/errors.jsonl` |
 | Pemakaian kill switch (produksi) | 1× (uji terkontrol, langsung dimatikan) | `logs/raw/calls.jsonl` |
 | Order simulasi | 0 | `logs/raw/orders.jsonl` |
 | Sinyal / skip | 0 sinyal, 0 skip | `logs/raw/signals.jsonl` |
 | Equity | Rp100.000.000 (0,00%) | `logs/raw/equity.jsonl` + state |
-| Snapshot spread forward | 60 (5 per panggilan) | `logs/raw/spreads.jsonl` |
-| Snapshot order book mentah | 60 | `logs/raw/depth.jsonl` |
-| Snapshot candle bot | 4 candle × 5 pair (1.000 bar) | `logs/raw/candles.json` |
+| Snapshot spread forward | **315** (5 per panggilan) | `logs/raw/spreads.jsonl` |
+| Snapshot order book mentah | **315** | `logs/raw/depth.jsonl` |
+| Snapshot candle bot | 200 bar × 5 pair (1.000 bar), mencakup 48 candle yang diproses | `logs/raw/candles.json` |
 
-**Kenapa belum ada trade?** Bukan karena bot tidak jalan: empat candle tertutup yang diproses
-(2026-11-06 12.00, 16.00, 20.00 UTC dan 2026-11-07 00.00 UTC) tidak memenuhi syarat masuk pada
-**kelima** pasangan sekaligus. Angka pada candle terakhir, 2026-11-07 00.00 UTC (divalidasi dengan
-kode backtest yang sama; tiga candle sebelumnya juga gagal dengan pola yang sama):
+**Kenapa belum ada trade?** Bukan karena bot tidak jalan: **48 candle tertutup** yang diproses
+(2026-11-06 12.00 UTC → 2026-11-14 08.00 UTC) tidak memenuhi syarat masuk pada **kelima**
+pasangan sekaligus. Angka pada candle terakhir, 2026-11-14 08.00 UTC (divalidasi dengan kode
+backtest yang sama; 47 candle sebelumnya juga gagal dengan pola yang sama):
 
 | Pair | Close | HHV20 | MA50 | Close > HHV20? | Close > MA50? |
 |---|---:|---:|---:|---|---|
-| BTC/IDR | 1.371.851.000 | 1.468.996.000 | 1.411.640.740 | tidak | tidak |
-| ETH/IDR | 40.571.000 | 44.291.000 | 41.278.220 | tidak | tidak |
-| XRP/IDR | 20.950 | 24.245 | 22.716,82 | tidak | tidak |
-| SOL/IDR | 1.624.202 | 1.776.000 | 1.699.978,02 | tidak | tidak |
-| DOGE/IDR | 1.300 | 1.415 | 1.356,18 | tidak | tidak |
+| BTC/IDR | 1.234.902.000 | 1.355.000.000 | 1.333.726.440 | tidak | tidak |
+| ETH/IDR | 35.007.000 | 38.174.000 | 38.105.680 | tidak | tidak |
+| XRP/IDR | 18.249 | 19.595 | 19.784,18 | tidak | tidak |
+| SOL/IDR | 1.393.845 | 1.555.943 | 1.541.952,02 | tidak | tidak |
+| DOGE/IDR | 1.158 | 1.262 | 1.245,54 | tidak | tidak |
 
 ### 1.1 Gap backtest vs forward pada jendela yang sama
 
-Jendela = candle yang benar-benar diproses bot: **2026-11-06 12.00 UTC → 2026-11-07 03.59:59 UTC (4 candle)**.
+Jendela = candle yang benar-benar diproses bot: **2026-11-06 12.00 UTC → 2026-11-14 11.59:59 UTC (48 candle)**.
 Backtest dijalankan ulang dengan `logs/raw/candles.json` (snapshot candle yang dilihat bot) + data
 beku di `data/raw/`, memakai fungsi sinyal yang sama (`lib/strategy.js`).
 
@@ -54,10 +54,10 @@ beku di `data/raw/`, memakai fungsi sinyal yang sama (`lib/strategy.js`).
 | Profit factor | — (0 trade) | — (0 trade) | — |
 | Jumlah trade | 0 | 0 | 0 |
 | Sinyal masuk | 0 | 0 | 0/0 cocok |
-| Benchmark BTC/IDR | **−1,00%** | — | — |
+| Benchmark BTC/IDR | **−10,88%** | — | — |
 
 Selisih return **0,00 pp** karena keduanya belum membuka posisi. Yang perlu dicatat: pada jendela
-yang sama BTC turun **−1,00%**, sedangkan strategi memilih tetap flat karena tidak ada pasangan yang
+yang sama BTC turun **−10,88%**, sedangkan strategi memilih tetap flat karena tidak ada pasangan yang
 menembus HHV20 dan berada di atas MA50. Ini contoh strategi yang "tidak memaksa trade".
 
 Pasar sedang di bawah rata-rata 50 bar setelah penurunan, jadi tidak ada breakout. Backtest pada
@@ -155,11 +155,11 @@ diperkirakan sejak awal (dan harusnya muncul di log):
    berikutnya bila `low < limit`; bot mengisi hanya bila `ask <= limit` pada order book live.
    Artinya bot **lebih lambat dan lebih konservatif** — tidak akan ada fill yang lebih baik dari
    backtest karena dibuat di mid/close.
-3. **Spread & slippage.** Backtest memakai median snapshot sebelum freeze (11,1–15,5 bp). 60 snapshot
-   forward (12 panggilan × 5 pair) memberi median: BTC 16,1 bp · ETH 4,5 bp · XRP 6,1 bp ·
-   SOL 11,1 bp · DOGE 15,2 bp. Sampelnya masih kecil dan bergerak antar panggilan, tetapi arahnya
-   **biaya forward setara atau lebih rendah** dari asumsi backtest untuk 4 dari 5 pair; BTC sedikit
-   lebih lebar, sehingga estimasi konservatif tetap dipakai.
+3. **Spread & slippage.** Backtest memakai median snapshot sebelum freeze (11,1–15,5 bp). **315 snapshot**
+   forward (63 panggilan × 5 pair) memberi median: BTC 2,4 bp · ETH 4,2 bp · XRP 6,0 bp ·
+   SOL 12,2 bp · DOGE 15,2 bp. Sampelnya sudah cukup banyak dan bergerak antar panggilan; arahnya
+   **biaya forward setara atau lebih rendah** dari asumsi backtest untuk 4 dari 5 pair; DOGE tetap
+   paling lebar, sehingga estimasi konservatif tetap dipakai.
 4. **Jam pasar.** Candle 4 jam UTC = 07.00, 11.00, 15.00, 19.00, 23.00, 03.00 WIB. Order yang jatuh
    di jam sepi mengisi di level yang lebih tipis; hal ini muncul sebagai selisih harga fill per
    trade di `orders.jsonl` (bid/ask terbaik ikut direkam).
@@ -187,8 +187,8 @@ diperkirakan sejak awal (dan harusnya muncul di log):
 | Kill switch | `KILL_SWITCH=1` → 5 skip berlabel `kill_switch`, 0 order | `logs/test/killswitch/` |
 | Kill switch produksi (storage) | `/api/kill?on=1` → tick berikutnya `killSwitch: true`, 0 order; `/api/kill?on=0` memulihkan | `logs/raw/calls.jsonl` |
 | Tanpa sinyal (uji lokal) | 3 panggilan, 2 candle, 0 order, 0 error | `logs/test/nosignal/` |
-| Tanpa sinyal (produksi) | 4 candle diproses, 0 order, 0 error | `logs/raw/calls.jsonl` |
-| Gap backtest–forward | backtest jendela 4 candle dihitung dari snapshot candle bot: 0 trade vs forward 0 trade, BTC −1,00% | `logs/raw/candles.json`, dashboard `?format=json` |
+| Tanpa sinyal (produksi) | 48 candle diproses, 0 order, 0 error | `logs/raw/calls.jsonl` |
+| Gap backtest–forward | backtest jendela 48 candle dihitung dari snapshot candle bot: 0 trade vs forward 0 trade, BTC −10,88% | `logs/raw/candles.json`, dashboard `?format=json` |
 | Panel posisi & pantauan | 0 posisi, 0 pending, 5 pair dipantau; seluruhnya di bawah MA50 saat snapshot terakhir | dashboard live `?format=json` → `forward.watchlist` |
 
 ---

@@ -7,29 +7,29 @@
  "pending": {},
  "cooldown": {},
  "day": {
-  "date": "2026-11-07",
+  "date": "2026-11-14",
   "startEquity": 100000000,
   "blocked": false
  },
  "killSwitch": false,
  "lastTick": {
-  "ts": "2026-11-07T04:54:22.121Z",
+  "ts": "2026-11-14T12:53:27.425Z",
   "equity": 100000000,
   "pairsOk": 5,
   "pairsInvalid": 0,
   "orders": 0
  },
  "lastCandle": {
-  "btc_idr": 1794009600,
-  "eth_idr": 1794009600,
-  "xrp_idr": 1794009600,
-  "sol_idr": 1794009600,
-  "doge_idr": 1794009600
+  "btc_idr": 1794643200,
+  "eth_idr": 1794643200,
+  "xrp_idr": 1794643200,
+  "sol_idr": 1794643200,
+  "doge_idr": 1794643200
  },
  "stats": {
   "orders": 0,
   "trades": 0,
   "fees": 0
  },
- "lastEquityDate": "2026-11-07"
+ "lastEquityDate": "2026-11-14"
 }

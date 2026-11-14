@@ -1,5 +1,5 @@
 === UJI EKSEKUSI & KONSISTENSI KODE (bukan forward test) ===
-waktu: 2026-11-07T06:05:09.392Z
+waktu: 2026-11-14T16:19:54.656Z
 PASS  backtest & bot sama-sama import signalAt dari lib/strategy.js — tidak ada duplikasi logika sinyal
 PASS  signalAt eksport tunggal
 PASS  snapshot order book punya bid & ask — bid 1364929000 ask 1367118000 spread 16.0 bp
